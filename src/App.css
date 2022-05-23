@@ -1,0 +1,301 @@
+* {box-sizing: border-box;}
+body {
+  margin: 0px !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+}
+.App {
+  text-align: center;
+}
+
+.page{
+  display: grid;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  grid: [row0-start] "nav main" auto [row0-end]
+        [row1-start] "nav main" 1fr [row1-end]
+        [row2-start] "btm btm" auto [row2-end]
+        / minmax(0px, max-content) 1fr;
+}
+
+bottom {
+  background-color: #ffdc93;
+  grid-area: btm;
+  z-index: 100;
+}
+
+nav {
+  background-color: #ffd793;
+  grid-area: nav;
+  text-align: right;
+  padding:2px 5px 2px 5px;
+}
+
+main {
+  background-color: #FFF;
+  grid-area: main;
+  overflow: auto;
+}
+
+.directory{
+  position: absolute;top: 0px;left: 0px;right: 0px;bottom: 0px;
+  display: grid;
+  grid-area: main;
+  grid: [row0-start] "countries places places" auto [row0-end]
+        [row1-start] "countries place place" auto [row1-end]
+        / minmax(0px,200px) 2fr 2fr;
+  grid-gap: 10px;
+  /* background-color: azure; */
+  background-color: rgb(243, 243, 243);
+  padding: 10px;
+}
+.place {
+  display: grid;
+  grid: [row0-start] "info photo" auto [row0-end]
+        [row1-start] "info contacts" auto [row1-end]
+        / minmax(max-content,4fr) 1fr;
+  grid-area: place;
+  overflow-y: auto;
+  grid-gap: 10px;
+  border-radius: 0.8rem;
+  background-color: #FFF;
+  box-shadow: 0 0 1px #0003;
+}
+.place>.info{
+  display: grid;
+  grid-area: info;
+  grid: [row0-start] "pole value" auto [row0-end]
+        / 200px 1fr;
+  
+  align-content: baseline;
+  padding: 0.8rem;
+  margin: 2px;
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+.place>.photos{
+  overflow-y: scroll;
+}
+.place>.info>div {padding: 2px 5px;}
+.place>.info>div>textarea, .place>.info>div>input {box-sizing: border-box; width: 100%; max-Height: 200px}
+.place>.info>div>.slider {width: 200px!important;}
+.place>.info>.map { width: 100%;}
+
+.place>.info .unsaved {background-color: rgb(255, 201, 119);}
+.countrylist {
+  padding: 5px;
+  display: block;
+  grid-area: countries;
+  grid-row-start: countries;
+  grid-column-start: countries;
+  grid-row-end: countries;
+  grid-column-end: countries;
+  background-color: rgb(234, 255, 231);
+  border-radius: 0.8rem;
+  padding: 0.8rem;
+  box-shadow: 0 0 1px #0003;
+  box-sizing: border-box;
+}
+
+.citylist {
+  padding: 5px;
+  background-color: rgb(223, 252, 248);
+  grid-area: citys;
+  overflow-y: auto;
+  border-radius: 0.8rem;
+  padding: 0.8rem;
+  box-shadow: 0 0 1px #0003;
+}
+
+.placelist {
+  padding: 5px;
+  grid-area: places;
+  overflow-y: auto;
+  background-color: rgb(253, 242, 218);
+  border-radius: 0.8rem;
+  padding: 0.8rem;
+  box-shadow: 0 0 1px #0003;
+}
+
+
+
+.file_target {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  border: solid 1px #0002;
+  border-radius: 0.4rem;
+  margin: 5px;
+  cursor: pointer;
+}
+.file_target:hover{
+  background-color: #9bca;
+}
+
+.file_target .progress {
+  
+  transition:all .2s ease;
+}
+.file_target .progress .item{
+  background:linear-gradient(to right,#acd, #fff 30px, #acd 60px) no-repeat -100px 0/100px 100%, #acd;
+  animation:move 3s linear infinite;
+}
+@keyframes move{
+  from{
+    background-position:-100px 0;
+  }
+  to{
+    background-position:120% 0;
+  }
+}
+
+.fileList {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+.fileList>.fileItem{
+  margin-top:10px;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.fileList>.fileItem>.submenu{
+  position: absolute;
+  left: 0;
+  padding-left: 150px;
+  transform-origin: top left;
+  animation:rotation 0.4s cubic-bezier(0, 1.32, 0.85, 1.11);/*(0.1, -0.6, 0.2, 0);;*/
+  /*border: solid 1px #000; */
+}
+@keyframes rotation{
+  from{
+    opacity: 0;
+    transform: rotate(90deg);
+  }
+  to{
+    opacity: 1;
+    transform: rotate(0deg)
+  }
+}
+.submenu>.item {
+  all:initial;
+  display: flex;
+  align-items: center;
+  margin: 5px;
+  border: dashed 2px rgb(2, 120, 230,0);
+}
+.submenu>.item:hover{
+  /*color: rgb(2, 120, 230);*/
+  border: dashed 2px rgb(2, 120, 230);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+
+.hovered {
+  border: dashed 1px #000;
+  background-color: #9bcd;
+}
+
+.selected {
+  background-color: #222;
+  color: #FFF;
+}
+ul, li { list-style: none; 
+         margin:2px 0px; 
+         padding-left: 0;
+      }
+
+ul > ul{
+  padding-left: 1rem;
+}
+input { width: 100% !important;}
+
+.item { padding: 5px 5px;
+       cursor: pointer;
+       font-size: 0.8rem;
+    }
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+/* @keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
+
+.notifications-container {
+  position: fixed;
+  width: max-content;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  overflow-x: hidden;
+}
+
+.alert {
+  right: 0px;
+  display: flex;
+  margin: 5px;
+  width: max-content;
+  border: solid 1px #000;
+  background-color: rgba(44, 48, 44, 0.651);
+  color: #ffd793;
+  border-radius: 0.4rem;
+  align-content: center;
+  justify-content: center;
+  z-index: 1000;
+  align-items: center;
+  padding:1rem 2rem;
+  transition:all 1s cubic-bezier(0, 0.36, 0.01, 0.99);
+  opacity: 1;
+  position: relative;
+    
+}
+
+.invisible{
+  right: -100%;
+  opacity: 0;
+}

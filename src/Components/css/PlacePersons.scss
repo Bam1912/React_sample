@@ -1,0 +1,45 @@
+#droppable div { 
+    background-color: #000;
+}
+
+.persons{
+    padding: 5px;
+    //  box-shadow: 0 0 1px #0003;
+    position: relative;
+    .addPerson{
+        position: absolute;
+        top:0.6rem;
+        right: 0.6rem;
+        font-size: 1.5rem;
+    }
+    .person{
+        width: 100%;
+        margin: 3px 0px;
+        padding: 4px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        cursor: pointer;
+    }
+    .current {
+        background-color: #ccc;
+        color:#000;
+        font-weight: bold;
+        overflow: visible;
+    }
+    .person-data{
+        border:dashed 1px #FFF;
+        padding: 5px;
+        margin: 0.5rem;
+        cursor: pointer;
+        .secondName{
+            font-size: 0.9rem;
+        }
+        .phone{
+            font-size: 0.9rem;
+        }
+        .email{
+            font-size: 0.9rem;
+        }
+    }
+}
